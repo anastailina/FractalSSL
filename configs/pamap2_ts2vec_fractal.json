@@ -1,0 +1,48 @@
+{
+  "dataset": {
+    "name": "pamap2",
+    "cache_dir": "cache/pamap2"
+  },
+  "dataloader": {
+    "batch_size": 256,
+    "num_workers": 4,
+    "drop_last": true
+  },
+  "model": {
+    "backbone": {
+      "name": "ts2vec",
+      "kwargs": {
+        "repr_dims": 320
+      }
+    },
+    "wrapper": {
+      "name": "fractal_ssl",
+      "kwargs": {
+        "proj_dim": 128,
+        "temperature": 0.2,
+        "levels": 4,
+        "noise_std": 0.01
+      }
+    }
+  },
+  "training": {
+    "backbone": {
+      "epochs": 50,
+      "lr": 0.001,
+      "optimizer": "adam",
+      "log_every": 25,
+      "checkpoint_dir": "runs/pamap2/ts2vec",
+      "checkpoint_prefix": "ts2vec",
+      "checkpoint_interval": 10
+    },
+    "fractal_ssl": {
+      "epochs": 100,
+      "lr": 0.001,
+      "optimizer": "adamw",
+      "log_every": 25,
+      "checkpoint_dir": "runs/pamap2/fractal",
+      "checkpoint_prefix": "fractal",
+      "checkpoint_interval": 20
+    }
+  }
+}
