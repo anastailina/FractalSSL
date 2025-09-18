@@ -1,0 +1,46 @@
+{
+  "dataset": {
+    "name": "pads",
+    "cache_dir": "cache/pads"
+  },
+  "dataloader": {
+    "batch_size": 128,
+    "num_workers": 2,
+    "drop_last": true
+  },
+  "model": {
+    "backbone": {
+      "name": "ts2vec",
+      "kwargs": {
+        "repr_dims": 256
+      }
+    },
+    "wrapper": {
+      "name": "fractal_ssl",
+      "kwargs": {
+        "proj_dim": 128,
+        "temperature": 0.25,
+        "levels": 5,
+        "noise_std": 0.02
+      }
+    }
+  },
+  "training": {
+    "backbone": {
+      "epochs": 40,
+      "lr": 0.001,
+      "optimizer": "adam",
+      "checkpoint_dir": "runs/pads/ts2vec",
+      "checkpoint_prefix": "pads_ts2vec",
+      "checkpoint_interval": 10
+    },
+    "fractal_ssl": {
+      "epochs": 80,
+      "lr": 0.0005,
+      "optimizer": "adamw",
+      "checkpoint_dir": "runs/pads/fractal",
+      "checkpoint_prefix": "pads_fractal",
+      "checkpoint_interval": 20
+    }
+  }
+}

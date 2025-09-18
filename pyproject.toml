@@ -1,0 +1,23 @@
+[project]
+name = "fractal-ssl"
+version = "0.1.0"
+description = "Research toolkit for fractal self-supervised learning on biological signals"
+requires-python = ">=3.9"
+dependencies = [
+    "torch>=2.0",
+    "numpy>=1.22",
+    "pandas>=1.5",
+    "scikit-learn>=1.3",
+    "ts2vec>=0.1.0",
+    "tqdm>=4.65",
+]
+
+[project.optional-dependencies]
+devel = [
+    "ipykernel",
+    "notebook",
+]
+
+[build-system]
+requires = ["setuptools>=62", "wheel"]
+build-backend = "setuptools.build_meta"
